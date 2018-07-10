@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Index from './pages/index'
+import App from './test';
+import Datatable from './datatable';
 
 ReactDOM.render(
   <div>
-    <h1>Hello, from REACT! Hello2)))</h1>
+    <App />
+    <Datatable />
   </div>,
   document.getElementById('root')
 );
