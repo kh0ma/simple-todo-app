@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 module.exports = {
+  mode: 'development',
   entry: './front-end/app.js',
   output: {
     path: __dirname,
@@ -8,9 +9,11 @@ module.exports = {
   },
   module: {
     rules: [{
-      test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
-      use: ['babel-loader']
+      test: /\.js$/,
+      exclude: /(node_modules|bower_components)/,
+      use: {
+        loader: 'babel-loader'
+      }
     }]
   },
   resolve: {
