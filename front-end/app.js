@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Index from './pages/index'
+
 ReactDOM.render(
-  <h1>Hello, from REACT!</h1>,
+  <div>
+    <h1>Hello, from REACT! Hello2)))</h1>
+  </div>,
   document.getElementById('root')
 );
