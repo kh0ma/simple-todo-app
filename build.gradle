@@ -39,29 +39,25 @@ repositories {
 }
 
 task npm_install(type: Exec) {
-  commandLine 'npm', 'install'
+  ignoreExitValue true
+  if(OperatingSystem.current().isWindows()) {
+    commandLine 'cmd',  '/c', 'npm', 'install'
+  } else {
+    commandLine 'npm', 'install'
+  }
 }
 
 task webpack_build(type: Exec) {
   ignoreExitValue true
   if(OperatingSystem.current().isWindows()) {
-    //TODO
+    commandLine 'cmd',  '/c', 'npx', 'webpack'
   } else {
     commandLine 'npx', 'webpack'
   }
 }
 
-task front_end_clean(type: Exec) {
-  ignoreExitValue true
-  if(OperatingSystem.current().isWindows()) {
-    //TODO
-  } else {
-    if(file("src/main/resources/static/simple-todo-app.js").exists()){
-      commandLine 'rm', 'src/main/resources/static/simple-todo-app.js'
-    } else {
-      commandLine 'echo', 'Cleaning front end on Unix: simple-todo-app.js does not exist'
-    }
-  }
+task front_end_clean(type: Delete) {
+  delete 'src/main/resources/static/simple-todo-app.js'
 }
 
 webpack_build.dependsOn npm_install
