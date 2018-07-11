@@ -57,7 +57,7 @@ task webpack_build(type: Exec) {
 }
 
 task front_end_clean(type: Delete) {
-  delete 'src/main/resources/static/simple-todo-app.js'
+  delete 'src/main/resources/static/js/simple-todo-app.js'
 }
 
 webpack_build.dependsOn npm_install

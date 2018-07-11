@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './test';
-import Datatable from './datatable';
+
+var api_url = URL;
 
 ReactDOM.render(
   <div>
-    <App />
-    <Datatable />
+    <a href = {api_url}>Link</a>
+    <h1>444</h1>
   </div>,
   document.getElementById('root')
 );
+
+console.log(URL + "ololololo");
