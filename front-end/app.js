@@ -6,7 +6,8 @@ var api_url = URL;
 ReactDOM.render(
   <div>
     <a href = {api_url}>Link</a>
-    <h1>444</h1>
+    <h1>dsdsd</h1>
+    <h2>{api_url}</h2>
   </div>,
   document.getElementById('root')
 );

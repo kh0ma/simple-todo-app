@@ -38,6 +38,7 @@ repositories {
 //    mavenCentral()
 }
 
+//todo see https://github.com/srs/gradle-node-plugin/blob/master/docs/node.md
 task npm_install(type: Exec) {
   ignoreExitValue true
   if(OperatingSystem.current().isWindows()) {
