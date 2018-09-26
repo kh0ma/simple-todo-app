@@ -19,7 +19,7 @@ jar {
     manifest {
         attributes "Main-Class": "App"
     }
-
+// TODO: is this required for packing to jar?
     from {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
