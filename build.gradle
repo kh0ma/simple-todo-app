@@ -7,14 +7,22 @@ plugins {
     // Apply the application plugin to add support for building an application
     id 'application'
 }
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
 // Define the main class for the application
 mainClassName = 'App'
 
 jar {
     baseName = 'simple-todo-app'
     version =  '1.0.0'
+    manifest {
+        attributes "Main-Class": "App"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
 
 dependencies {
