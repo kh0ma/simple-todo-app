@@ -11,7 +11,7 @@ public class App {
     }
 
     public static void main(String[] args) {
-        String greeting = new App().getGreeting();
+        var greeting = new App().getGreeting();
         port(5555);
         staticFileLocation("static");
         get("/greetings", (req, res) -> greeting);
