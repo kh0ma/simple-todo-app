@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Datatable from './test';
+import AjaxDemo from './ajax-demo';
 
 var api_url = URL;
 
@@ -13,7 +14,9 @@ ReactDOM.render(
       <li>lol</li>
     </ul>
     <h2>{api_url}</h2>
-    <Datatable/>
+
+    <h1>AjaxDemo</h1>
+    <AjaxDemo />
   </div>,
   document.getElementById('root')
 );
