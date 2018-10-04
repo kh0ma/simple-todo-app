@@ -18,10 +18,11 @@ public class PostAndRetriveMessage {
             String messageReq = req.body();
             if(StringUtils.isNotEmpty(messageReq)) {
                 message = messageReq;
+                return message;
             } else {
                 res.status(400);
+                return "Message was empty!";
             }
-            return res;
         });
     }
 }

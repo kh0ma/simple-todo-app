@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Datatable from './test';
 import AjaxDemo from './ajax-demo';
+import MessageRetriever from './message-retriever';
 
 var api_url = URL;
 
@@ -14,9 +15,13 @@ ReactDOM.render(
       <li>lol</li>
     </ul>
     <h2>{api_url}</h2>
-
+<hr/>
     <h1>AjaxDemo</h1>
     <AjaxDemo />
+
+<hr/>
+    <h1>Message Retriever</h1>
+    <MessageRetriever />
   </div>,
   document.getElementById('root')
 );
