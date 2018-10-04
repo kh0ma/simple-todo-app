@@ -18,10 +18,10 @@ public class App {
             return "{\n" +
                     "  \"items\": [\n" +
                     "    { \"id\": 1, \"name\": \"Apples\", \"price\": \"$2\" },\n" +
-                    "    { \"id\": 1, \"name\": \"Apples\", \"price\": \"$2\" },\n" +
-                    "    { \"id\": 1, \"name\": \"Apples\", \"price\": \"$2\" },\n" +
-                    "    { \"id\": 1, \"name\": \"Apples\", \"price\": \"$2\" },\n" +
-                    "    { \"id\": 1, \"name\": \"Apples\", \"price\": \"$2\" },\n" +
+                    "    { \"id\": 1, \"name\": \"Apples1\", \"price\": \"$2\" },\n" +
+                    "    { \"id\": 1, \"name\": \"Apples2\", \"price\": \"$2\" },\n" +
+                    "    { \"id\": 1, \"name\": \"Apples3\", \"price\": \"$2\" },\n" +
+                    "    { \"id\": 1, \"name\": \"Apples4\", \"price\": \"$2\" },\n" +
                     "    { \"id\": 2, \"name\": \"Peaches\", \"price\": \"$5\" }\n" +
                     "  ] \n" +
                     "}";
