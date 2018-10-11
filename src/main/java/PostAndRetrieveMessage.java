@@ -1,3 +1,5 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spark.utils.StringUtils;
 
 import static spark.Spark.get;
@@ -6,7 +8,9 @@ import static spark.Spark.post;
 /**
  * @author Oleksandr Khomenko > khomenko.dp@gmail.com
  */
-public class PostAndRetriveMessage {
+public class PostAndRetrieveMessage {
+    private static final Logger LOGGER = LoggerFactory.getLogger(PostAndRetrieveMessage.class);
+
     private static final String PATH = "/message";
 
     private static String message = "Empty yet..";
@@ -16,6 +20,7 @@ public class PostAndRetriveMessage {
 
         post(PATH, (req, res)-> {
             String messageReq = req.body();
+            LOGGER.info("message is {}", messageReq);
             if(StringUtils.isNotEmpty(messageReq)) {
                 message = messageReq;
                 return message;

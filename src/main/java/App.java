@@ -27,7 +27,7 @@ public class App {
                     "}";
         });
 
-        PostAndRetriveMessage.apply();
+        PostAndRetrieveMessage.apply();
     }
 
     private static void enableCorsSupport() {
@@ -50,7 +50,6 @@ public class App {
         before((req, res) -> {
             res.header("Access-Control-Allow-Origin", "*");
             res.header("Access-Control-Allow-Headers", "*");
-            res.type("application/json");
         });
     }
 }
