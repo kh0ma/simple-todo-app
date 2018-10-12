@@ -12,7 +12,7 @@ class MessageRetriever extends React.Component {
             isLoaded: false,
             message: null,
             mes_value: "",
-            recent_messages: {}
+            recent_messages: []
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -65,7 +65,7 @@ class MessageRetriever extends React.Component {
 
     refreshMessages(currentMessage) {
         if (currentMessage != null) {
-            Object.assign(this.state.recent_messages, currentMessage);
+            this.state.recent_messages.push(currentMessage);
         } else {
             fetch(URL + this.PATH)
                 .then(res => res.json())
@@ -98,7 +98,17 @@ class MessageRetriever extends React.Component {
                 method: 'DELETE'
             }
         )
-            .then(() => this.refreshMessages());
+            .then(() => {
+                let updatedRecentMessages = this.state.recent_messages.filter(el => {
+                    return el.id !== id;
+                });
+                this.setState(
+                    {
+                        recent_messages: updatedRecentMessages
+                    }
+                );
+
+            });
     }
 
     refreshCurrentMessage(currentMessage) {
@@ -139,7 +149,6 @@ class MessageRetriever extends React.Component {
             message,
             recent_messages
         } = this.state;
-        const keys = Object.keys(recent_messages);
         if (error) {
             return (
                 <div> Error: {
@@ -169,17 +178,17 @@ class MessageRetriever extends React.Component {
                     <table>
                         <tbody>
                         {
-                            keys.reverse().map((key, index) =>
+                            recent_messages.slice().reverse().map((message, index) =>
                                 <tr key={index}>
                                     <td>
-                                        {key}
+                                        {message.id}
                                     </td>
                                     <td>
-                                        {recent_messages[key]}
+                                        {message.message}
                                     </td>
                                     <td>
                                         <button
-                                            onClick={() => this.deleteMessage(key)}>delete
+                                            onClick={() => this.deleteMessage(message.id)}>delete
                                         </button>
                                     </td>
 

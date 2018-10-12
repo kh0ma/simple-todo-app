@@ -1,4 +1,5 @@
 import com.google.common.primitives.Ints;
+import models.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.utils.StringUtils;
@@ -21,7 +22,7 @@ public class PostAndRetrieveMessage {
     public static final AtomicInteger MES_INDEX = new AtomicInteger(1);
     private static final Logger LOGGER = LoggerFactory.getLogger(PostAndRetrieveMessage.class);
     private static final String PATH = "/messages";
-    private static final Map<Integer, String> MESSAGES = new ConcurrentHashMap<>();
+    private static final Map<Integer, Message> MESSAGES = new ConcurrentHashMap<>();
     private static String currentMessage = "Empty yet..";
 
     public static void apply() {
@@ -51,7 +52,7 @@ public class PostAndRetrieveMessage {
 
     private static void queryMessages() {
         get(PATH, (req, res) -> {
-            String json = App.OBJECT_MAPPER.toJson(MESSAGES);
+            String json = App.OBJECT_MAPPER.toJson(MESSAGES.values());
             return json;
         });
     }
@@ -62,9 +63,13 @@ public class PostAndRetrieveMessage {
             LOGGER.info("currentMessage is {}", messageReq);
             if (StringUtils.isNotEmpty(messageReq)) {
                 int index = MES_INDEX.getAndIncrement();
-                MESSAGES.put(index, messageReq);
+                Message message = Message.builder()
+                        .id(index)
+                        .message(messageReq)
+                        .build();
+                MESSAGES.put(index, message);
                 currentMessage = messageReq;
-                return App.OBJECT_MAPPER.toJson(Collections.singletonMap(index, messageReq));
+                return App.OBJECT_MAPPER.toJson(message);
             } else {
                 res.status(BAD_REQUEST_400);
                 return "Message was empty!";
