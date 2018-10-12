@@ -1,3 +1,5 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import spark.Spark;
 
 import static spark.Spark.*;
@@ -5,6 +7,13 @@ import static spark.Spark.*;
 public class App {
     public String getGreeting() {
         return "Hello world.";
+    }
+
+    public static final Gson OBJECT_MAPPER;
+    static {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.setPrettyPrinting();
+        OBJECT_MAPPER = gsonBuilder.create();
     }
 
     public static void main(String[] args) {
