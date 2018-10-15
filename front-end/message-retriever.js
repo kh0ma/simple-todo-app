@@ -1,5 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import Paper from '@material-ui/core/Paper';
 
 class MessageRetriever extends React.Component {
 
@@ -82,7 +85,6 @@ class MessageRetriever extends React.Component {
                     (error) => {
                         this.setState(
                             {
-                                isLoaded: true,
                                 error
                             }
                         );
@@ -124,7 +126,6 @@ class MessageRetriever extends React.Component {
                 .then(result => {
                         this.setState(
                             {
-                                isLoaded: true,
                                 message: result
                             }
                         );
@@ -132,7 +133,6 @@ class MessageRetriever extends React.Component {
                     (error) => {
                         this.setState(
                             {
-                                isLoaded: true,
                                 error
                             }
                         );
@@ -161,16 +161,20 @@ class MessageRetriever extends React.Component {
         } else {
 
             return (
-                <div>
+                <Paper>
+                    <h1>Message Retriever</h1>
+
                     <h3>Message: {message}</h3>
 
                     <form onSubmit={this.handleSubmit}>
 
-                        <label htmlFor="message">Enter message</label>
-                        <input id="message" name="message" type="text"
+                        <Input id="message"
+                               name="message"
+                               type="text"
+                               placeholder="Enter message"
                                value={this.state.mes_value}
                                onChange={this.handleChange}/>
-                        <button>Send message!</button>
+                        <Button type="submit" color="primary">Send message!</Button>
 
                     </form>
 
@@ -187,9 +191,9 @@ class MessageRetriever extends React.Component {
                                         {message.message}
                                     </td>
                                     <td>
-                                        <button
-                                            onClick={() => this.deleteMessage(message.id)}>delete
-                                        </button>
+                                        <Button color="secondary" onClick={this.deleteMessage.bind(this, message.id)}>
+                                            delete
+                                        </Button>
                                     </td>
 
                                 </tr>
@@ -197,7 +201,7 @@ class MessageRetriever extends React.Component {
                         }
                         </tbody>
                     </table>
-                </div>
+                </Paper>
             );
         }
 
