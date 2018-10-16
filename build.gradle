@@ -41,7 +41,7 @@ dependencies {
     // Use JUnit test framework
     testCompile 'junit:junit:4.12'
 
-    provided 'org.projectlombok:lombok:1.18.2'
+    compileOnly 'org.projectlombok:lombok:1.18.2'
 
     apt 'org.projectlombok:lombok:1.18.2'
 }

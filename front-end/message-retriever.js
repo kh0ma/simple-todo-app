@@ -1,8 +1,21 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+import {withStyles} from '@material-ui/core/styles';
+
+const styles = theme => ({
+    paper: {
+        ...theme.mixins.gutters(),
+        paddingTop: theme.spacing.unit * 3,
+        paddingBottom: theme.spacing.unit * 3,
+    }
+});
 
 class MessageRetriever extends React.Component {
 
@@ -143,6 +156,7 @@ class MessageRetriever extends React.Component {
     }
 
     render() {
+        const{ classes } = this.props;
         const {
             error,
             isLoaded,
@@ -161,10 +175,18 @@ class MessageRetriever extends React.Component {
         } else {
 
             return (
-                <Paper>
-                    <h1>Message Retriever</h1>
+                <Paper className={classes.paper}>
+                    <Typography variant="subtitle1"
+                                component="h2"
+                                gutterBottom>
+                        Message Retriever
+                    </Typography>
 
-                    <h3>Message: {message}</h3>
+                    <Typography variant="subtitle1"
+                                component="h3"
+                                gutterBottom>
+                        Message: {message}
+                    </Typography>
 
                     <form onSubmit={this.handleSubmit}>
 
@@ -178,29 +200,33 @@ class MessageRetriever extends React.Component {
 
                     </form>
 
-                    <h4>Recent Messages:</h4>
-                    <table>
-                        <tbody>
+                    <Typography variant="h4"
+                                component="h4"
+                                gutterBottom>
+                        Recent Messages:
+                    </Typography>
+
+                    <Table>
+                        <TableBody>
                         {
                             recent_messages.slice().reverse().map((message, index) =>
-                                <tr key={index}>
-                                    <td>
+                                <TableRow key={index} hover>
+                                    <TableCell>
                                         {message.id}
-                                    </td>
-                                    <td>
+                                    </TableCell>
+                                    <TableCell>
                                         {message.message}
-                                    </td>
-                                    <td>
+                                    </TableCell>
+                                    <TableCell>
                                         <Button color="secondary" onClick={this.deleteMessage.bind(this, message.id)}>
                                             delete
                                         </Button>
-                                    </td>
-
-                                </tr>
+                                    </TableCell>
+                                </TableRow>
                             )
                         }
-                        </tbody>
-                    </table>
+                        </TableBody>
+                    </Table>
                 </Paper>
             );
         }
@@ -208,4 +234,4 @@ class MessageRetriever extends React.Component {
     }
 }
 
-export default MessageRetriever;
+export default withStyles(styles)(MessageRetriever);

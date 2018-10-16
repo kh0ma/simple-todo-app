@@ -6,8 +6,8 @@ import MessageRetriever from './message-retriever';
 ReactDOM.render(
     <div>
         <Grid container>
-            <Grid item xs={4}></Grid>
-            <Grid item xs={4}>
+            <Grid item xs={3}></Grid>
+            <Grid item xs={6}>
                 <MessageRetriever/>
             </Grid>
         </Grid>
