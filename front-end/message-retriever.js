@@ -156,7 +156,7 @@ class MessageRetriever extends React.Component {
     }
 
     render() {
-        const{ classes } = this.props;
+        const {classes} = this.props;
         const {
             error,
             isLoaded,
@@ -208,23 +208,24 @@ class MessageRetriever extends React.Component {
 
                     <Table>
                         <TableBody>
-                        {
-                            recent_messages.slice().reverse().map((message, index) =>
-                                <TableRow key={index} hover>
-                                    <TableCell>
-                                        {message.id}
-                                    </TableCell>
-                                    <TableCell>
-                                        {message.message}
-                                    </TableCell>
-                                    <TableCell>
-                                        <Button color="secondary" onClick={this.deleteMessage.bind(this, message.id)}>
-                                            delete
-                                        </Button>
-                                    </TableCell>
-                                </TableRow>
-                            )
-                        }
+                            {
+                                recent_messages.slice().reverse().map((message, index) =>
+                                    <TableRow key={index} hover>
+                                        <TableCell>
+                                            {message.id}
+                                        </TableCell>
+                                        <TableCell>
+                                            {message.message}
+                                        </TableCell>
+                                        <TableCell>
+                                            <Button color="secondary"
+                                                    onClick={this.deleteMessage.bind(this, message.id)}>
+                                                delete
+                                            </Button>
+                                        </TableCell>
+                                    </TableRow>
+                                )
+                            }
                         </TableBody>
                     </Table>
                 </Paper>
