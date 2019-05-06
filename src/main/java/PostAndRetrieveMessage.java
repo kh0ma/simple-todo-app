@@ -1,10 +1,10 @@
 import com.google.common.primitives.Ints;
+import models.ApiError;
 import models.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.utils.StringUtils;
 
-import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -72,7 +72,10 @@ public class PostAndRetrieveMessage {
                 return App.OBJECT_MAPPER.toJson(message);
             } else {
                 res.status(BAD_REQUEST_400);
-                return "Message was empty!";
+                ApiError apiError = ApiError.builder()
+                        .message("Message was empty!")
+                        .build();
+                return App.OBJECT_MAPPER.toJson(apiError);
             }
         });
     }

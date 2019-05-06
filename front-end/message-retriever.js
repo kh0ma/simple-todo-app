@@ -44,25 +44,38 @@ class MessageRetriever extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        this.setState(
+            {
+                error: null
+            }
+        );
         const data = new FormData(event.target);
-        debugger;
         let currentMessage = data.get("message");
         fetch(URL + this.PATH, {
             method: 'POST',
             body: currentMessage,
         })
-            .then(res => res.json())
+            .then(response => {
+                response.json()
+                    .then(json => {
+                        if (response.ok) {
+                            return json
+                        } else {
+                            return Promise.reject(json)
+                        }
+                    })
+                    .catch((error) => {
+                        this.setState(
+                            {
+                                isLoaded: true,
+                                error
+                            }
+                        );
+                    })
+            })
             .then((result) => {
                     this.refreshCurrentMessage(currentMessage);
                     this.refreshMessages(result)
-                },
-                (error) => {
-                    this.setState(
-                        {
-                            isLoaded: true,
-                            error
-                        }
-                    );
                 }
             )
             .finally(() => {
@@ -86,7 +99,6 @@ class MessageRetriever extends React.Component {
             fetch(URL + this.PATH)
                 .then(res => res.json())
                 .then(result => {
-                        debugger;
                         console.log(result);
                         this.setState(
                             {
@@ -163,14 +175,7 @@ class MessageRetriever extends React.Component {
             message,
             recent_messages
         } = this.state;
-        if (error) {
-            return (
-                <div> Error: {
-                    error.message
-                }
-                </div>
-            );
-        } else if (!isLoaded) {
+        if (!isLoaded) {
             return <div> Loading... </div>;
         } else {
 
@@ -186,6 +191,13 @@ class MessageRetriever extends React.Component {
                                 component="h3"
                                 gutterBottom>
                         Message: {message}
+                    </Typography>
+
+                    <Typography variant="subtitle1"
+                                component="h3"
+                                color="error"
+                                gutterBottom>
+                        {error ? `Error: ${error.message}` : null}
                     </Typography>
 
                     <form onSubmit={this.handleSubmit}>
