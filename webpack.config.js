@@ -27,7 +27,8 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-        'URL': JSON.stringify("http://localhost:5555")
+        //FIX ME UNCOMMENT ME if locally
+        // 'URL': JSON.stringify("http://localhost:5555")
     })
   ]
 };
