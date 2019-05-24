@@ -5,6 +5,3 @@
 node_modules
 build
 *.log
-
-#ignore before production usage
-/src/main/resources/static/simple-todo-app.js
