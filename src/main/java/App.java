@@ -20,7 +20,7 @@ public class App {
     public static void main(String[] args) {
         var greeting = new App().getGreeting();
         String port = System.getProperty("server.port");
-        if (port.matches("-?\\d+(\\.\\d+)?")) {
+        if (port != null && port.matches("-?\\d+(\\.\\d+)?")) {
              port(Integer.valueOf(port));
         } else {
             port(5555);
