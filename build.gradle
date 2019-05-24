@@ -80,6 +80,7 @@ task front_end_clean(type: Delete) {
   delete 'src/main/resources/static/js/simple-todo-app.js'
 }
 
-webpack_build.dependsOn npm_install
-processResources.dependsOn webpack_build
-clean.dependsOn front_end_clean
+//Uncomment me if build locally
+//webpack_build.dependsOn npm_install
+//processResources.dependsOn webpack_build
+//clean.dependsOn front_end_clean
