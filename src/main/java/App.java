@@ -1,15 +1,16 @@
+import static spark.Spark.before;
+import static spark.Spark.get;
+import static spark.Spark.options;
+import static spark.Spark.port;
+import static spark.Spark.staticFileLocation;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import spark.Spark;
 
-import static spark.Spark.*;
-
 public class App {
-    public String getGreeting() {
-        return "Hello world.";
-    }
-
     public static final Gson OBJECT_MAPPER;
+
     static {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setPrettyPrinting();
@@ -18,7 +19,12 @@ public class App {
 
     public static void main(String[] args) {
         var greeting = new App().getGreeting();
-        port(5555);
+        String port = System.getProperty("server.port");
+        if (port.matches("-?\\d+(\\.\\d+)?")) {
+             port(Integer.valueOf(port));
+        } else {
+            port(5555);
+        }
         staticFileLocation("static");
         enableCorsSupport();
         get("/greetings", (req, res) -> greeting);
@@ -60,5 +66,9 @@ public class App {
             res.header("Access-Control-Allow-Origin", "*");
             res.header("Access-Control-Allow-Headers", "*");
         });
+    }
+
+    public String getGreeting() {
+        return "Hello world.";
     }
 }
